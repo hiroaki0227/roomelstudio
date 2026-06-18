@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Theme Encyclopedia — Roomel</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Themes — Roomel Studio</title>
+  <meta name="description" content="All themes in Roomel — collect characters and furniture from each themed world and build your own diorama." />
   <!--
     Image paths:
       images/themes/theme_001.png      theme preview images
@@ -12,156 +13,138 @@
       images/backgrounds/bg_001.png    background sprites
     Adjust paths to match your server directory structure before deploying.
   -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset & Custom Properties ───────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --panel-bg:    #F5EAD8;
-      --filter-bg:   #EDE0C4;
-      --accent-gold: #C8A040;
-      --dark-brown:  #6B3A00;
-      --text-dark:   #3A2010;
-      --page-bg:     #FAF5ED;
-      --card-shadow: 0 2px 14px rgba(58, 32, 16, 0.09);
+      --bg:        #fffaf0;
+      --paper:     #ffffff;
+      --ink:       #3a3022;
+      --muted:     #756b5b;
+      --gold:      #b8912e;
+      --gold-soft: #ead7a3;
+      --line:      #eadfc7;
     }
 
-    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
 
     body {
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--page-bg);
-      color: var(--text-dark);
-      line-height: 1.6;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.7;
     }
 
-    /* ── Site Nav ────────────────────────────────────────── */
-    .site-header {
-      background: var(--dark-brown);
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* ── Header ──────────────────────────────────────────── */
+    header {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 250, 240, 0.92);
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      z-index: 10;
+      backdrop-filter: blur(8px);
     }
-    .nav-inner {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      height: 54px;
+    nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
-    .nav-logo {
-      font-size: 1.2rem;
+    .brand {
       font-weight: 800;
-      color: var(--accent-gold);
-      text-decoration: none;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+      color: var(--gold);
     }
     .nav-links {
-      list-style: none;
       display: flex;
-      gap: 1.75rem;
+      gap: 18px;
+      font-size: 14px;
     }
-    .nav-links a {
-      color: #D4BFA0;
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      transition: color 0.15s;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links a.active { color: var(--accent-gold); }
+    .nav-links a { color: var(--ink); }
+    .nav-links a.active { color: var(--gold); font-weight: 700; }
 
-    /* ── Page Hero ───────────────────────────────────────── */
-    .page-hero {
-      background: linear-gradient(160deg, #4A2400 0%, var(--dark-brown) 100%);
-      text-align: center;
-      padding: 3.5rem 1.5rem 3rem;
-      border-bottom: 3px solid var(--accent-gold);
+    /* ── Page intro ──────────────────────────────────────── */
+    .page-intro { padding: 44px 0 8px; }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 30px;
+      line-height: 1.25;
     }
-    .page-hero h1 {
-      font-size: 2.4rem;
-      font-weight: 800;
-      color: var(--accent-gold);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.6rem;
-    }
-    .page-hero p {
-      color: #C8B090;
-      font-size: 0.95rem;
-      max-width: 480px;
-      margin: 0 auto;
+
+    .lead {
+      margin: 0;
+      max-width: 640px;
+      font-size: 16px;
+      color: var(--muted);
     }
 
     /* ── Jump Nav ────────────────────────────────────────── */
-    .jump-nav {
-      max-width: 960px;
-      margin: 2rem auto 0;
-      padding: 0 1.5rem;
-    }
-    .jump-nav-label {
-      font-size: 0.72rem;
+    .jump-wrap { padding: 28px 0 40px; }
+
+    .jump-label {
+      font-size: 12px;
       font-weight: 700;
-      color: var(--dark-brown);
+      color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.65rem;
-      opacity: 0.65;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
     }
-    .jump-nav-list {
+    .jump-list {
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.45rem;
+      gap: 8px;
     }
-    .jump-nav-list a {
+    .jump-list a {
       display: inline-block;
-      padding: 0.22rem 0.7rem;
-      background: var(--panel-bg);
-      border: 1.5px solid var(--accent-gold);
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--dark-brown);
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .jump-list a:hover {
+      border-color: var(--gold);
+      color: var(--gold);
       text-decoration: none;
-      transition: background 0.15s, color 0.15s;
-    }
-    .jump-nav-list a:hover {
-      background: var(--accent-gold);
-      color: #fff;
-    }
-
-    /* ── Main Layout ─────────────────────────────────────── */
-    .main-content {
-      max-width: 960px;
-      margin: 2.25rem auto 5rem;
-      padding: 0 1.5rem;
     }
 
     /* ── Theme Card ──────────────────────────────────────── */
-    .theme-card {
-      background: var(--panel-bg);
-      border-radius: 18px;
-      overflow: hidden;
-      margin-bottom: 3rem;
-      box-shadow: var(--card-shadow);
-    }
+    #themes-container { padding-bottom: 60px; }
 
+    .theme-card {
+      background: var(--paper);
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(90, 65, 25, 0.06);
+    }
     .theme-head {
       display: flex;
       align-items: stretch;
     }
     .theme-preview {
-      width: 260px;
-      min-width: 180px;
+      width: 240px;
+      min-width: 160px;
       flex-shrink: 0;
       overflow: hidden;
-      background: var(--filter-bg);
+      background: var(--line);
       cursor: pointer;
       position: relative;
     }
@@ -172,148 +155,151 @@
       display: block;
       transition: transform 0.2s ease;
     }
-    .theme-preview:hover img { transform: scale(1.03); }
+    .theme-preview:hover img { transform: scale(1.04); }
     .theme-preview::after {
       content: '⤢';
       position: absolute;
-      bottom: 0.5rem;
-      right: 0.6rem;
+      bottom: 8px;
+      right: 10px;
       font-size: 1.1rem;
       color: #fff;
       opacity: 0;
       transition: opacity 0.15s;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
       pointer-events: none;
     }
     .theme-preview:hover::after { opacity: 1; }
 
     .theme-meta {
       flex: 1;
-      padding: 1.6rem 1.8rem;
+      padding: 24px 28px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 0.45rem;
+      gap: 6px;
     }
     .theme-eyebrow {
-      font-size: 0.7rem;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--accent-gold);
-      letter-spacing: 0.12em;
+      color: var(--muted);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
     .theme-title {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: var(--dark-brown);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--ink);
       line-height: 1.2;
+      margin: 0;
     }
     .theme-caption {
-      font-size: 0.88rem;
-      color: #7A5030;
+      font-size: 14px;
+      color: var(--muted);
       font-style: italic;
+      margin: 0;
     }
     .they-heard {
-      color: var(--accent-gold);
+      color: var(--gold);
       font-weight: 700;
       font-style: normal;
     }
     .badge-new {
       display: inline-block;
-      background: var(--accent-gold);
+      background: var(--gold);
       color: #fff;
-      font-size: 0.66rem;
-      font-weight: 800;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 0.1em;
-      padding: 0.14rem 0.55rem;
-      border-radius: 4px;
+      padding: 2px 10px;
+      border-radius: 999px;
       text-transform: uppercase;
       align-self: flex-start;
     }
 
-    /* ── Items Section ───────────────────────────────────── */
+    /* ── Items Block ─────────────────────────────────────── */
     .items-block {
-      padding: 1.2rem 1.8rem 1.5rem;
-      border-top: 2px solid var(--filter-bg);
+      padding: 16px 22px 20px;
+      border-top: 1px solid var(--line);
     }
-    .items-block + .items-block {
-      border-top: 1.5px solid var(--filter-bg);
-    }
-
     .items-heading {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.72rem;
-      font-weight: 800;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 12px;
     }
     .items-heading::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--accent-gold);
-      opacity: 0.25;
+      background: var(--line);
     }
-
     .items-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 0.7rem;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: 8px;
     }
-
-    /* ── Item Card (zoomable) ────────────────────────────── */
     .item-card {
-      background: #fffaf4;
-      border-radius: 10px;
-      padding: 0.65rem 0.4rem 0.55rem;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      padding: 10px 6px 8px;
       text-align: center;
-      box-shadow: 0 1px 5px rgba(58, 32, 16, 0.07);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
     }
     .item-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 14px rgba(58, 32, 16, 0.18);
+      border-color: var(--gold-soft);
+      box-shadow: 0 4px 12px rgba(90, 65, 25, 0.1);
+      transform: translateY(-2px);
     }
     .item-card img {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       object-fit: contain;
       display: block;
-      margin: 0 auto 0.4rem;
+      margin: 0 auto 6px;
     }
     .item-card .item-name {
-      font-size: 0.65rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      line-height: 1.35;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.3;
     }
-
-    /* Background cards are slightly wider to suit landscape images */
-    .bg-grid {
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
+    .bg-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
     .bg-grid .item-card img {
       width: 100%;
-      height: 80px;
+      height: 78px;
       object-fit: cover;
       border-radius: 6px;
+    }
+
+    /* ── Coming Soon ─────────────────────────────────────── */
+    .coming-soon-strip {
+      background: var(--gold);
+      color: #fff;
+      text-align: center;
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
     /* ── Modal ───────────────────────────────────────────── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(24, 10, 2, 0.82);
+      background: rgba(58, 48, 34, 0.82);
       z-index: 200;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 24px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease;
@@ -323,74 +309,70 @@
       pointer-events: all;
     }
     .modal-box {
-      background: var(--panel-bg);
-      border-radius: 16px;
-      padding: 2rem 1.75rem 1.5rem;
+      background: var(--paper);
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      padding: 28px 22px 20px;
       max-width: min(88vw, 520px);
       max-height: 90vh;
       overflow: auto;
       position: relative;
-      transform: scale(0.88);
-      transition: transform 0.22s ease;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+      box-shadow: 0 20px 60px rgba(58, 48, 34, 0.25);
     }
     .modal-overlay.open .modal-box { transform: scale(1); }
-
     .modal-close {
       position: absolute;
-      top: 0.7rem;
-      right: 0.7rem;
-      width: 30px;
-      height: 30px;
-      background: var(--filter-bg);
-      border: none;
+      top: 12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      background: var(--bg);
+      border: 1px solid var(--line);
       border-radius: 50%;
-      font-size: 0.85rem;
-      color: var(--dark-brown);
+      font-size: 13px;
+      color: var(--muted);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.15s, color 0.15s;
-      line-height: 1;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
-    .modal-close:hover { background: var(--accent-gold); color: #fff; }
-
+    .modal-close:hover {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+    }
     .modal-nav-row {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.85rem;
+      gap: 8px;
+      margin-bottom: 12px;
     }
     .modal-nav-btn {
       flex-shrink: 0;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 2px solid var(--accent-gold);
-      background: var(--filter-bg);
-      color: var(--dark-brown);
-      font-size: 1.05rem;
+      border: 1px solid var(--gold-soft);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.15s, color 0.15s, opacity 0.15s;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
       line-height: 1;
     }
     .modal-nav-btn:hover:not(:disabled) {
-      background: var(--accent-gold);
+      background: var(--gold);
       color: #fff;
+      border-color: var(--gold);
     }
-    .modal-nav-btn:disabled {
-      opacity: 0.25;
-      cursor: default;
-    }
-    .modal-img-wrap {
-      flex: 1;
-      text-align: center;
-      min-width: 0;
-    }
+    .modal-nav-btn:disabled { opacity: 0.25; cursor: default; }
+    .modal-img-wrap { flex: 1; text-align: center; min-width: 0; }
     .modal-img-wrap img {
       max-width: 100%;
       max-height: 60vh;
@@ -403,81 +385,89 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.5rem;
-      padding-top: 0.1rem;
+      gap: 8px;
+      margin-top: 4px;
     }
     .modal-label {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--dark-brown);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
     }
     .modal-counter {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent-gold);
-      letter-spacing: 0.05em;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
       white-space: nowrap;
     }
 
     /* ── Footer ──────────────────────────────────────────── */
-    .site-footer {
-      border-top: 1.5px solid var(--filter-bg);
-      text-align: center;
-      padding: 2rem 1.5rem;
-      color: #9A7A5A;
-      font-size: 0.8rem;
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
     }
-    .site-footer a { color: var(--accent-gold); text-decoration: none; }
 
     /* ── Responsive ──────────────────────────────────────── */
-    @media (max-width: 580px) {
-      .page-hero h1    { font-size: 1.8rem; }
-      .theme-head      { flex-direction: column; }
-      .theme-preview   { width: 100%; min-width: unset; max-height: 180px; }
-      .theme-meta      { padding: 1.25rem 1.25rem; }
-      .theme-title     { font-size: 1.3rem; }
-      .items-block     { padding: 1rem 1.25rem 1.25rem; }
-      .items-grid      { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 0.5rem; }
-      .item-card img   { width: 54px; height: 54px; }
-      .bg-grid         { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
-      .bg-grid .item-card img { height: 68px; }
+    @media (max-width: 720px) {
+      .nav-links  { display: none; }
+      .theme-head { flex-direction: column; }
+      .theme-preview { width: 100%; min-width: unset; max-height: 160px; }
+      .theme-meta { padding: 16px; }
+      .theme-title { font-size: 18px; }
+      .items-block { padding: 12px 16px 16px; }
+      .items-grid  { grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; }
+      .item-card img { width: 50px; height: 50px; }
+      .bg-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+      .bg-grid .item-card img { height: 64px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Navigation ───────────────────────────────────────────── -->
-<header class="site-header">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Roomel</a>
-    <ul class="nav-links">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="themes.html" class="active">Themes</a></li>
-      <li><a href="index.html#links">Links</a></li>
-    </ul>
+<!-- ── Header ───────────────────────────────────────────────── -->
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">ROOMEL STUDIO</div>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="themes.html" class="active">Themes</a>
+        <a href="index.html#links">Links</a>
+        <a href="terms-en.html">terms</a>
+        <a href="privacy-en.html">privacy-policy</a>
+      </div>
+    </nav>
   </div>
 </header>
 
-<!-- ── Page Hero ────────────────────────────────────────────── -->
-<div class="page-hero">
-  <h1>Theme Encyclopedia</h1>
-  <p>Collect characters &amp; furniture from each themed world,<br>and build your very own diorama.</p>
-</div>
+<!-- ── Page Intro ───────────────────────────────────────────── -->
+<section class="page-intro">
+  <div class="wrap">
+    <h2>Theme Encyclopedia</h2>
+    <p class="lead">Collect characters &amp; furniture from each themed world, and build your very own diorama.</p>
+  </div>
+</section>
 
 <!-- ── Jump Nav ─────────────────────────────────────────────── -->
-<nav class="jump-nav" aria-label="Jump to theme">
-  <div class="jump-nav-label">Jump to theme</div>
-  <ul class="jump-nav-list" id="jump-list"></ul>
-</nav>
+<div class="jump-wrap">
+  <div class="wrap">
+    <div class="jump-label">Jump to theme</div>
+    <ul class="jump-list" id="jump-list"></ul>
+  </div>
+</div>
 
 <!-- ── Theme Sections ───────────────────────────────────────── -->
-<main class="main-content" id="themes-container"></main>
+<main>
+  <div class="wrap" id="themes-container"></div>
+</main>
 
 <!-- ── Footer ───────────────────────────────────────────────── -->
-<footer class="site-footer">
-  <p>&copy; 2025 Roomel Studio &nbsp;&middot;&nbsp;
-     <a href="https://roomelstudio.com">roomelstudio.com</a>
-  </p>
+<footer>
+  <div class="wrap">
+    © 2026 Roomel Studio. All rights reserved. &nbsp;·&nbsp;
+    <a href="https://roomelstudio.com">roomelstudio.com</a>
+  </div>
 </footer>
 
 <!-- ── Modal ────────────────────────────────────────────────── -->
@@ -919,10 +909,12 @@ function itemCard(id, name, type) {
 const container = document.getElementById('themes-container');
 
 themes.forEach(t => {
+  const comingSoon = t.num >= '006';
   const sec = document.createElement('section');
   sec.className = 'theme-card';
   sec.id        = t.id;
   sec.innerHTML = `
+    ${comingSoon ? '<div class="coming-soon-strip">Coming Soon</div>' : ''}
     <div class="theme-head">
       <div class="theme-preview"
            data-modal-src="${t.preview}"
@@ -932,7 +924,7 @@ themes.forEach(t => {
       </div>
       <div class="theme-meta">
         <div class="theme-eyebrow">Theme ${t.num}</div>
-        <h2 class="theme-title">${t.name}</h2>
+        <h3 class="theme-title">${t.name}</h3>
         <p class="theme-caption">
           <span class="they-heard">They heard...</span> ${t.desc}
         </p>
@@ -999,7 +991,6 @@ function navigate(dir) {
   if (next >= 0 && next < zoomables.length) showAt(next);
 }
 
-// Click on any zoomable element (theme preview or item card)
 document.getElementById('themes-container').addEventListener('click', e => {
   const target = e.target.closest('[data-modal-src]');
   if (!target) return;
@@ -1007,19 +998,15 @@ document.getElementById('themes-container').addEventListener('click', e => {
   openModal(index >= 0 ? index : 0);
 });
 
-// Prev / Next buttons
 prevBtn.addEventListener('click', () => navigate(-1));
 nextBtn.addEventListener('click', () => navigate(1));
 
-// Close on overlay background click (not on the box itself)
 overlay.addEventListener('click', e => {
   if (!modalBox.contains(e.target)) closeModal();
 });
 
-// Close button
 document.getElementById('modal-close').addEventListener('click', closeModal);
 
-// Keyboard: Escape to close, ←→ to navigate
 document.addEventListener('keydown', e => {
   if (!overlay.classList.contains('open')) return;
   if (e.key === 'Escape')     closeModal();
@@ -1027,7 +1014,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigate(1);
 });
 
-// Collect all zoomable elements after rendering
 collectZoomables();
 </script>
 </body>
