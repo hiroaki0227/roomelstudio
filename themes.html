@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Encyclopedia — Roomel</title>
+  <!--
+    Image paths:
+      images/themes/theme_001.png      theme preview images
+      images/characters/chr_001.png    character sprites
+      images/furniture/fur_001.png     furniture sprites
+      images/backgrounds/bg_001.png    background sprites
+    Adjust paths to match your server directory structure before deploying.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Custom Properties ───────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --panel-bg:    #F5EAD8;
+      --filter-bg:   #EDE0C4;
+      --accent-gold: #C8A040;
+      --dark-brown:  #6B3A00;
+      --text-dark:   #3A2010;
+      --page-bg:     #FAF5ED;
+      --card-shadow: 0 2px 14px rgba(58, 32, 16, 0.09);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--page-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* ── Site Nav ────────────────────────────────────────── */
+    .site-header {
+      background: var(--dark-brown);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .nav-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.75rem;
+    }
+    .nav-links a {
+      color: #D4BFA0;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links a.active { color: var(--accent-gold); }
+
+    /* ── Page Hero ───────────────────────────────────────── */
+    .page-hero {
+      background: linear-gradient(160deg, #4A2400 0%, var(--dark-brown) 100%);
+      text-align: center;
+      padding: 3.5rem 1.5rem 3rem;
+      border-bottom: 3px solid var(--accent-gold);
+    }
+    .page-hero h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+    }
+    .page-hero p {
+      color: #C8B090;
+      font-size: 0.95rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── Jump Nav ────────────────────────────────────────── */
+    .jump-nav {
+      max-width: 960px;
+      margin: 2rem auto 0;
+      padding: 0 1.5rem;
+    }
+    .jump-nav-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.65rem;
+      opacity: 0.65;
+    }
+    .jump-nav-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .jump-nav-list a {
+      display: inline-block;
+      padding: 0.22rem 0.7rem;
+      background: var(--panel-bg);
+      border: 1.5px solid var(--accent-gold);
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .jump-nav-list a:hover {
+      background: var(--accent-gold);
+      color: #fff;
+    }
+
+    /* ── Main Layout ─────────────────────────────────────── */
+    .main-content {
+      max-width: 960px;
+      margin: 2.25rem auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    /* ── Theme Card ──────────────────────────────────────── */
+    .theme-card {
+      background: var(--panel-bg);
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .theme-head {
+      display: flex;
+      align-items: stretch;
+    }
+    .theme-preview {
+      width: 260px;
+      min-width: 180px;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--filter-bg);
+      cursor: pointer;
+      position: relative;
+    }
+    .theme-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .theme-preview:hover img { transform: scale(1.03); }
+    .theme-preview::after {
+      content: '⤢';
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.6rem;
+      font-size: 1.1rem;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.15s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    .theme-preview:hover::after { opacity: 1; }
+
+    .theme-meta {
+      flex: 1;
+      padding: 1.6rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+    .theme-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .theme-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--dark-brown);
+      line-height: 1.2;
+    }
+    .theme-caption {
+      font-size: 0.88rem;
+      color: #7A5030;
+      font-style: italic;
+    }
+    .they-heard {
+      color: var(--accent-gold);
+      font-weight: 700;
+      font-style: normal;
+    }
+    .badge-new {
+      display: inline-block;
+      background: var(--accent-gold);
+      color: #fff;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      padding: 0.14rem 0.55rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      align-self: flex-start;
+    }
+
+    /* ── Items Section ───────────────────────────────────── */
+    .items-block {
+      padding: 1.2rem 1.8rem 1.5rem;
+      border-top: 2px solid var(--filter-bg);
+    }
+    .items-block + .items-block {
+      border-top: 1.5px solid var(--filter-bg);
+    }
+
+    .items-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+    .items-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--accent-gold);
+      opacity: 0.25;
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 0.7rem;
+    }
+
+    /* ── Item Card (zoomable) ────────────────────────────── */
+    .item-card {
+      background: #fffaf4;
+      border-radius: 10px;
+      padding: 0.65rem 0.4rem 0.55rem;
+      text-align: center;
+      box-shadow: 0 1px 5px rgba(58, 32, 16, 0.07);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 14px rgba(58, 32, 16, 0.18);
+    }
+    .item-card img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 0.4rem;
+    }
+    .item-card .item-name {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+
+    /* Background cards are slightly wider to suit landscape images */
+    .bg-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+    .bg-grid .item-card img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    /* ── Modal ───────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 10, 2, 0.82);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: var(--panel-bg);
+      border-radius: 16px;
+      padding: 2rem 1.75rem 1.5rem;
+      max-width: min(88vw, 520px);
+      max-height: 90vh;
+      overflow: auto;
+      position: relative;
+      transform: scale(0.88);
+      transition: transform 0.22s ease;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+    }
+    .modal-overlay.open .modal-box { transform: scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.7rem;
+      width: 30px;
+      height: 30px;
+      background: var(--filter-bg);
+      border: none;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      color: var(--dark-brown);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+    }
+    .modal-close:hover { background: var(--accent-gold); color: #fff; }
+
+    .modal-nav-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+    .modal-nav-btn {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-gold);
+      background: var(--filter-bg);
+      color: var(--dark-brown);
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s, opacity 0.15s;
+      line-height: 1;
+    }
+    .modal-nav-btn:hover:not(:disabled) {
+      background: var(--accent-gold);
+      color: #fff;
+    }
+    .modal-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+    .modal-img-wrap {
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+    .modal-img-wrap img {
+      max-width: 100%;
+      max-height: 60vh;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.1rem;
+    }
+    .modal-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+    }
+    .modal-counter {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1.5px solid var(--filter-bg);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: #9A7A5A;
+      font-size: 0.8rem;
+    }
+    .site-footer a { color: var(--accent-gold); text-decoration: none; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 580px) {
+      .page-hero h1    { font-size: 1.8rem; }
+      .theme-head      { flex-direction: column; }
+      .theme-preview   { width: 100%; min-width: unset; max-height: 180px; }
+      .theme-meta      { padding: 1.25rem 1.25rem; }
+      .theme-title     { font-size: 1.3rem; }
+      .items-block     { padding: 1rem 1.25rem 1.25rem; }
+      .items-grid      { grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 0.5rem; }
+      .item-card img   { width: 54px; height: 54px; }
+      .bg-grid         { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+      .bg-grid .item-card img { height: 68px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ───────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Roomel</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="themes.html" class="active">Themes</a></li>
+      <li><a href="index.html#links">Links</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ── Page Hero ────────────────────────────────────────────── -->
+<div class="page-hero">
+  <h1>Theme Encyclopedia</h1>
+  <p>Collect characters &amp; furniture from each themed world,<br>and build your very own diorama.</p>
+</div>
+
+<!-- ── Jump Nav ─────────────────────────────────────────────── -->
+<nav class="jump-nav" aria-label="Jump to theme">
+  <div class="jump-nav-label">Jump to theme</div>
+  <ul class="jump-nav-list" id="jump-list"></ul>
+</nav>
+
+<!-- ── Theme Sections ───────────────────────────────────────── -->
+<main class="main-content" id="themes-container"></main>
+
+<!-- ── Footer ───────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <p>&copy; 2025 Roomel Studio &nbsp;&middot;&nbsp;
+     <a href="https://roomelstudio.com">roomelstudio.com</a>
+  </p>
+</footer>
+
+<!-- ── Modal ────────────────────────────────────────────────── -->
+<div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog">
+  <div class="modal-box" id="modal-box">
+    <button class="modal-close" id="modal-close" aria-label="Close">&#10005;</button>
+    <div class="modal-nav-row">
+      <button class="modal-nav-btn" id="modal-prev" aria-label="Previous">&#8592;</button>
+      <div class="modal-img-wrap">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <button class="modal-nav-btn" id="modal-next" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="modal-footer">
+      <div id="modal-label" class="modal-label"></div>
+      <div id="modal-counter" class="modal-counter"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Data & Rendering ─────────────────────────────────────── -->
+<script>
+const themes = [
+  {
+    id: 'thm_001', num: '001',
+    name: 'Office',
+    desc: 'Humans work here.',
+    preview: 'images/themes/theme_001.png',
+    isNew: false,
+    chr: [
+      ['chr_001', 'Office Rookie · Elf'],
+      ['chr_002', 'Supervisor · Human'],
+      ['chr_003', 'Office Boss · Oni'],
+      ['chr_004', 'Office Mentor · Angel'],
+      ['chr_005', 'Office Lady · Devil'],
+      ['chr_006', 'Software Engineer · Dwarf'],
+      ['chr_007', 'Mentee · Frog'],
+    ],
+    fur: [
+      ['fur_001', 'Office Plant'],
+      ['fur_002', 'Paperwork Tower'],
+      ['fur_003', 'Whiteboard'],
+      ['fur_004', 'Office Copier'],
+    ],
+    bg: [['bg_001', 'Office']],
+  },
+  {
+    id: 'thm_002', num: '002',
+    name: 'Pirate',
+    desc: 'Pirates set out on adventures in search of treasure.',
+    preview: 'images/themes/theme_002.png',
+    isNew: false,
+    chr: [
+      ['chr_008', 'Captain · Elf'],
+      ['chr_009', 'Supply Runner · Human'],
+      ['chr_010', 'Helmsman · Oni'],
+      ['chr_011', 'Navigator · Angel'],
+      ['chr_012', 'Treasure Hunter · Devil'],
+      ['chr_013', 'Cannoneer · Dwarf'],
+      ['chr_014', 'Lookout · Frog'],
+    ],
+    fur: [
+      ['fur_005', 'Pirate Cannon'],
+      ['fur_006', 'Pirate Chest'],
+      ['fur_007', 'Pirate Flag'],
+    ],
+    bg: [['bg_002', 'Pirate Ship']],
+  },
+  {
+    id: 'thm_003', num: '003',
+    name: 'Summer Festival',
+    desc: 'Humans enjoy festivals on summer nights.',
+    preview: 'images/themes/theme_003.png',
+    isNew: false,
+    chr: [
+      ['chr_015', 'Yukata · Elf'],
+      ['chr_016', 'Yukata · Human'],
+      ['chr_017', 'Yukata · Oni'],
+      ['chr_018', 'Yukata · Angel'],
+      ['chr_019', 'Yukata · Devil'],
+      ['chr_020', 'Yukata · Dwarf'],
+      ['chr_021', 'Onsen Yukata · Frog'],
+    ],
+    fur: [
+      ['fur_008', 'Festival Lantern'],
+      ['fur_009', 'Goldfish Scooping'],
+      ['fur_010', 'Shooting Gallery'],
+      ['fur_011', 'Yakisoba Stall'],
+    ],
+    bg: [['bg_003', 'Festival Grounds']],
+  },
+  {
+    id: 'thm_004', num: '004',
+    name: 'High School: In Class',
+    desc: 'Humans learn in a place called school.',
+    preview: 'images/themes/theme_004.png',
+    isNew: false,
+    chr: [
+      ['chr_022', 'Class Representative · Elf'],
+      ['chr_023', 'Honor Student · Human'],
+      ['chr_024', 'Lunchbox · Oni'],
+      ['chr_025', 'Teacher · Angel'],
+      ['chr_026', 'Uniform · Devil'],
+      ['chr_027', 'Inventor · Dwarf'],
+      ['chr_028', 'Experimenting · Frog'],
+    ],
+    fur: [
+      ['fur_012', 'School Desk'],
+      ['fur_013', 'Blackboard'],
+      ['fur_014', 'Cleaning Supply Locker'],
+    ],
+    bg: [['bg_004', 'Classroom']],
+  },
+  {
+    id: 'thm_005', num: '005',
+    name: 'Aquarium',
+    desc: 'Humans visit aquariums to see unusual creatures.',
+    preview: 'images/themes/theme_005.png',
+    isNew: false,
+    chr: [
+      ['chr_029', 'Dolphin Show · Elf'],
+      ['chr_030', 'Lost · Human'],
+      ['chr_031', 'Shark Costume · Oni'],
+      ['chr_032', 'Keeper · Angel'],
+      ['chr_033', 'Penguin Lover · Devil'],
+      ['chr_034', 'Tank Engineer · Dwarf'],
+      ['chr_035', 'Exhibit · Frog'],
+    ],
+    fur: [
+      ['fur_015', 'Jellyfish Tank'],
+      ['fur_016', 'Penguins'],
+      ['fur_017', 'Tropical Fish Tank'],
+      ['fur_018', 'Dolphin'],
+    ],
+    bg: [['bg_005', 'Aquarium']],
+  },
+  {
+    id: 'thm_006', num: '006',
+    name: 'Enoshima Trip',
+    desc: 'Ringing the bell brings love.',
+    preview: 'images/themes/theme_006.png',
+    isNew: false,
+    chr: [
+      ['chr_036', 'Ice Cream · Elf'],
+      ['chr_037', 'Sightseeing · Human'],
+      ['chr_038', 'Energetic · Oni'],
+      ['chr_039', 'Curious · Angel'],
+      ['chr_040', 'Bell-Ringing · Devil'],
+      ['chr_041', 'Watching · Dwarf'],
+      ['chr_042', 'Whitebait · Frog'],
+    ],
+    fur: [
+      ['fur_019', 'Observation Tower'],
+      ['fur_020', 'Viewing Telescope'],
+      ['fur_021', 'Whitebait Bowl'],
+      ['fur_022', "Lover's Bell"],
+    ],
+    bg: [['bg_006', 'Enoshima']],
+  },
+  {
+    id: 'thm_007', num: '007',
+    name: 'Isekai Adventure',
+    desc: 'Humans are summoned to another world.',
+    preview: 'images/themes/theme_007.png',
+    isNew: false,
+    chr: [
+      ['chr_043', 'Princess · Elf'],
+      ['chr_044', 'Hero · Human'],
+      ['chr_045', 'Warrior · Oni'],
+      ['chr_046', 'Saint · Angel'],
+      ['chr_047', 'Demon Lord · Devil'],
+      ['chr_048', 'Inventor · Dwarf'],
+      ['chr_049', 'Wizard · Frog'],
+    ],
+    fur: [
+      ['fur_023', 'Royal Throne'],
+      ['fur_024', 'Summoning Circle'],
+      ['fur_025', 'Summoning Crystal'],
+      ['fur_026', "Hero's Sword"],
+    ],
+    bg: [['bg_007', 'Throne Room']],
+  },
+  {
+    id: 'thm_008', num: '008',
+    name: 'Rice Planting',
+    desc: 'Rice begins its journey here.',
+    preview: 'images/themes/theme_008.png',
+    isNew: false,
+    chr: [
+      ['chr_050', 'Rice Planting · Elf'],
+      ['chr_051', 'Rice Field · Human'],
+      ['chr_052', 'Speedy · Oni'],
+      ['chr_053', 'Careful · Angel'],
+      ['chr_054', 'Muddy · Devil'],
+      ['chr_055', 'Observing · Dwarf'],
+      ['chr_056', 'Popular · Frog'],
+    ],
+    fur: [
+      ['fur_027', 'Seedling Tray'],
+      ['fur_028', 'Scarecrow'],
+      ['fur_029', 'Frog'],
+      ['fur_030', 'Frogs'],
+    ],
+    bg: [['bg_008', 'Rice Field']],
+  },
+  {
+    id: 'thm_009', num: '009',
+    name: 'Bakery',
+    desc: 'Fresh bread makes people happy.',
+    preview: 'images/themes/theme_009.png',
+    isNew: false,
+    chr: [
+      ['chr_057', 'Bakery Girl · Elf'],
+      ['chr_058', 'Customer · Human'],
+      ['chr_059', 'Baker · Oni'],
+      ['chr_060', 'Cashier · Angel'],
+      ['chr_061', 'Bread Lover · Devil'],
+      ['chr_062', 'Accompanying · Dwarf'],
+      ['chr_063', 'Frog Bread · Frog'],
+    ],
+    fur: [
+      ['fur_031', 'Bread Shelf'],
+      ['fur_032', 'Frog Bread'],
+      ['fur_033', 'Cash Register'],
+      ['fur_034', 'Bread Basket'],
+    ],
+    bg: [['bg_009', 'Bakery']],
+  },
+  {
+    id: 'thm_010', num: '010',
+    name: 'Detective vs Phantom Thief',
+    desc: 'Every great detective needs a rival.',
+    preview: 'images/themes/theme_010.png',
+    isNew: false,
+    chr: [
+      ['chr_064', 'Detective · Elf'],
+      ['chr_065', 'Assistant · Human'],
+      ['chr_066', 'Inspector · Oni'],
+      ['chr_067', 'Police Officer · Angel'],
+      ['chr_068', 'Mail Carrier? · Devil'],
+      ['chr_069', 'Mad Doctor · Dwarf'],
+      ['chr_070', 'Client · Frog'],
+    ],
+    fur: [
+      ['fur_035', 'Calling Card'],
+      ['fur_036', 'Magnifying Glass'],
+      ['fur_037', 'Evidence Board'],
+      ['fur_038', 'Detective Desk'],
+    ],
+    bg: [['bg_010', 'Detective Agency']],
+  },
+  {
+    id: 'thm_011', num: '011',
+    name: 'Camping Night',
+    desc: 'Humans spend their evenings around a campfire.',
+    preview: 'images/themes/theme_011.png',
+    isNew: false,
+    chr: [
+      ['chr_071', 'Campfire · Elf'],
+      ['chr_072', 'Camp Cook · Human'],
+      ['chr_073', 'Fire Keeper · Oni'],
+      ['chr_074', 'Stargazing · Angel'],
+      ['chr_075', 'Marshmallow · Devil'],
+      ['chr_076', 'Campfire Master · Dwarf'],
+      ['chr_077', 'Homecoming · Frog'],
+    ],
+    fur: [
+      ['fur_039', 'Tent'],
+      ['fur_040', 'Campfire'],
+      ['fur_041', 'Lantern'],
+      ['fur_042', 'Camping Chair'],
+    ],
+    bg: [['bg_011', 'Campsite at Night']],
+  },
+  {
+    id: 'thm_012', num: '012',
+    name: 'Sumo Play',
+    desc: 'Humans enjoy a sport called sumo.',
+    preview: 'images/themes/theme_012.png',
+    isNew: false,
+    chr: [
+      ['chr_078', 'Shiko · Elf'],
+      ['chr_079', 'Challenger · Human'],
+      ['chr_080', 'Serious · Oni'],
+      ['chr_081', 'Referee · Angel'],
+      ['chr_082', 'Never Lose · Devil'],
+      ['chr_083', 'Strategist · Dwarf'],
+      ['chr_084', 'Yokozuna · Frog'],
+    ],
+    fur: [
+      ['fur_043', 'Gunbai'],
+      ['fur_044', 'Champion Cup'],
+      ['fur_045', 'Chanko Pot'],
+      ['fur_046', 'Zabuton'],
+    ],
+    bg: [['bg_012', 'Sumo Arena']],
+  },
+  {
+    id: 'thm_013', num: '013',
+    name: 'Kyoto Trip',
+    desc: 'Humans are fascinated by Japanese traditions.',
+    preview: 'images/themes/theme_013.png',
+    isNew: false,
+    chr: [
+      ['chr_085', 'Sightseeing · Elf'],
+      ['chr_086', 'Fortune · Human'],
+      ['chr_087', 'Street Food · Oni'],
+      ['chr_088', 'Photographer · Angel'],
+      ['chr_089', 'Kimono · Devil'],
+      ['chr_090', 'Companion · Dwarf'],
+      ['chr_091', 'Matcha Parfait · Frog'],
+    ],
+    fur: [
+      ['fur_047', 'Japanese Parasol'],
+      ['fur_048', 'Rental Kimono · Red'],
+      ['fur_049', 'Rental Kimono · Blue'],
+      ['fur_050', 'Matcha Parfait'],
+    ],
+    bg: [['bg_013', 'Thousand Torii Gates']],
+  },
+  {
+    id: 'thm_014', num: '014',
+    name: 'Halloween',
+    desc: 'Humans enjoy pretending to be someone else.',
+    preview: 'images/themes/theme_014.png',
+    isNew: false,
+    chr: [
+      ['chr_092', 'Witch · Elf'],
+      ['chr_093', 'Vampire · Human'],
+      ['chr_094', 'Frankenstein · Oni'],
+      ['chr_095', 'Ghost · Angel'],
+      ['chr_096', 'Black Cat · Devil'],
+      ['chr_097', 'Mummy · Dwarf'],
+      ['chr_098', 'Pumpkin Frog'],
+    ],
+    fur: [
+      ['fur_051', "Jack-o'-Lantern"],
+      ['fur_052', 'Candy Basket'],
+      ['fur_053', 'Witch Hat'],
+      ['fur_054', 'Ghost Decoration'],
+    ],
+    bg: [['bg_014', 'Halloween Town']],
+  },
+  {
+    id: 'thm_015', num: '015',
+    name: 'Convenience Store',
+    desc: "Humans can't resist stopping by convenience stores.",
+    preview: 'images/themes/theme_015.png',
+    isNew: false,
+    chr: [
+      ['chr_099', 'Store Clerk · Elf'],
+      ['chr_100', 'Stocking · Human'],
+      ['chr_101', 'Store Manager · Oni'],
+      ['chr_102', 'Waiting · Angel'],
+      ['chr_103', 'Limited Sweets · Devil'],
+      ['chr_104', 'Midnight Snack · Dwarf'],
+      ['chr_105', 'Bun · Frog'],
+    ],
+    fur: [
+      ['fur_055', 'Cash Register'],
+      ['fur_056', 'Oden'],
+      ['fur_057', 'Onigiri Shelf'],
+      ['fur_058', 'Steamed Bun Warmer'],
+    ],
+    bg: [['bg_015', 'Convenience Store']],
+  },
+  {
+    id: 'thm_016', num: '016',
+    name: 'Hot Spring Inn',
+    desc: 'Humans sometimes enjoy doing absolutely nothing.',
+    preview: 'images/themes/theme_016.png',
+    isNew: false,
+    chr: [
+      ['chr_106', 'After Bath · Elf'],
+      ['chr_107', 'Table Tennis · Human'],
+      ['chr_108', 'Milk After Bath · Oni'],
+      ['chr_109', 'Garden · Angel'],
+      ['chr_110', 'Hot Spring Bun · Devil'],
+      ['chr_111', 'Table Tennis · Dwarf'],
+      ['chr_112', 'Overheated · Frog'],
+    ],
+    fur: [
+      ['fur_059', 'Hot Spring Bun'],
+      ['fur_060', 'Table Tennis Paddle'],
+      ['fur_061', 'Wooden Bath Bucket'],
+      ['fur_062', 'Yukata Set'],
+    ],
+    bg: [['bg_016', 'Hot Spring Inn']],
+  },
+  {
+    id: 'thm_017', num: '017',
+    name: 'Christmas Town',
+    desc: 'Humans spend weeks preparing surprises for the people they care about.',
+    preview: 'images/themes/theme_017.png',
+    isNew: true,
+    chr: [
+      ['chr_113', 'Santa · Elf'],
+      ['chr_114', 'Santa · Human'],
+      ['chr_115', 'Santa · Oni'],
+      ['chr_116', 'Santa · Angel'],
+      ['chr_117', 'Santa · Devil'],
+      ['chr_118', 'Santa · Dwarf'],
+      ['chr_119', 'Reindeer · Frog'],
+    ],
+    fur: [
+      ['fur_063', 'Christmas Tree'],
+      ['fur_064', 'Gift Box'],
+      ['fur_065', 'Snowman'],
+      ['fur_066', 'Santa Sleigh'],
+    ],
+    bg: [['bg_017', 'Christmas Town']],
+  },
+];
+
+// ── Build Jump Nav ────────────────────────────────────────────
+const jumpList = document.getElementById('jump-list');
+themes.forEach(t => {
+  const li = document.createElement('li');
+  const a  = document.createElement('a');
+  a.href        = '#' + t.id;
+  a.textContent = t.name + (t.isNew ? ' ✦' : '');
+  li.appendChild(a);
+  jumpList.appendChild(li);
+});
+
+// ── Item card builder ─────────────────────────────────────────
+function itemCard(id, name, type) {
+  const dir = type === 'chr' ? 'characters' : type === 'fur' ? 'furniture' : 'backgrounds';
+  const src = `images/${dir}/${id}.png`;
+  return `<div class="item-card"
+               data-modal-src="${src}"
+               data-modal-label="${name}">
+    <img src="${src}" alt="${name}" loading="lazy" onerror="this.style.opacity='0.25'">
+    <div class="item-name">${name}</div>
+  </div>`;
+}
+
+// ── Build Theme Sections ──────────────────────────────────────
+const container = document.getElementById('themes-container');
+
+themes.forEach(t => {
+  const sec = document.createElement('section');
+  sec.className = 'theme-card';
+  sec.id        = t.id;
+  sec.innerHTML = `
+    <div class="theme-head">
+      <div class="theme-preview"
+           data-modal-src="${t.preview}"
+           data-modal-label="${t.name}">
+        <img src="${t.preview}" alt="${t.name} — theme preview" loading="lazy"
+             onerror="this.style.opacity='0.15'">
+      </div>
+      <div class="theme-meta">
+        <div class="theme-eyebrow">Theme ${t.num}</div>
+        <h2 class="theme-title">${t.name}</h2>
+        <p class="theme-caption">
+          <span class="they-heard">They heard...</span> ${t.desc}
+        </p>
+        ${t.isNew ? '<span class="badge-new">New</span>' : ''}
+      </div>
+    </div>
+    <div class="items-block">
+      <div class="items-heading">Characters</div>
+      <div class="items-grid">${t.chr.map(([id, name]) => itemCard(id, name, 'chr')).join('')}</div>
+    </div>
+    <div class="items-block">
+      <div class="items-heading">Furniture</div>
+      <div class="items-grid">${t.fur.map(([id, name]) => itemCard(id, name, 'fur')).join('')}</div>
+    </div>
+    <div class="items-block">
+      <div class="items-heading">Background</div>
+      <div class="items-grid bg-grid">${t.bg.map(([id, name]) => itemCard(id, name, 'bg')).join('')}</div>
+    </div>`;
+  container.appendChild(sec);
+});
+
+// ── Modal Logic ───────────────────────────────────────────────
+const overlay      = document.getElementById('modal-overlay');
+const modalImg     = document.getElementById('modal-img');
+const modalLabel   = document.getElementById('modal-label');
+const modalCounter = document.getElementById('modal-counter');
+const modalBox     = document.getElementById('modal-box');
+const prevBtn      = document.getElementById('modal-prev');
+const nextBtn      = document.getElementById('modal-next');
+
+let zoomables    = [];
+let currentIndex = 0;
+
+function collectZoomables() {
+  zoomables = Array.from(document.querySelectorAll('[data-modal-src]'));
+}
+
+function showAt(index) {
+  currentIndex = index;
+  const el = zoomables[index];
+  modalImg.src             = el.dataset.modalSrc;
+  modalImg.alt             = el.dataset.modalLabel;
+  modalLabel.textContent   = el.dataset.modalLabel;
+  modalCounter.textContent = `${index + 1} / ${zoomables.length}`;
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === zoomables.length - 1;
+}
+
+function openModal(index) {
+  showAt(index);
+  overlay.classList.add('open');
+  overlay.removeAttribute('aria-hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function navigate(dir) {
+  const next = currentIndex + dir;
+  if (next >= 0 && next < zoomables.length) showAt(next);
+}
+
+// Click on any zoomable element (theme preview or item card)
+document.getElementById('themes-container').addEventListener('click', e => {
+  const target = e.target.closest('[data-modal-src]');
+  if (!target) return;
+  const index = zoomables.indexOf(target);
+  openModal(index >= 0 ? index : 0);
+});
+
+// Prev / Next buttons
+prevBtn.addEventListener('click', () => navigate(-1));
+nextBtn.addEventListener('click', () => navigate(1));
+
+// Close on overlay background click (not on the box itself)
+overlay.addEventListener('click', e => {
+  if (!modalBox.contains(e.target)) closeModal();
+});
+
+// Close button
+document.getElementById('modal-close').addEventListener('click', closeModal);
+
+// Keyboard: Escape to close, ←→ to navigate
+document.addEventListener('keydown', e => {
+  if (!overlay.classList.contains('open')) return;
+  if (e.key === 'Escape')     closeModal();
+  if (e.key === 'ArrowLeft')  navigate(-1);
+  if (e.key === 'ArrowRight') navigate(1);
+});
+
+// Collect all zoomable elements after rendering
+collectZoomables();
+</script>
+</body>
+</html>
