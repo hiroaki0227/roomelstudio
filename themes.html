@@ -408,9 +408,50 @@
       font-size: 14px;
     }
 
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(255,250,240,0.97);
+      border-top: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 12px 20px;
+      font-size: 15px;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+
     /* ── Responsive ──────────────────────────────────────── */
     @media (max-width: 720px) {
       .nav-links  { display: none; }
+      .hamburger  { display: flex; }
       .theme-head { flex-direction: column; }
       .theme-preview { width: 100%; min-width: unset; max-height: 160px; }
       .theme-meta { padding: 16px; }
@@ -436,7 +477,16 @@
         <a href="terms-en.html">terms</a>
         <a href="privacy-en.html">privacy-policy</a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="index.html">About</a>
+      <a href="themes.html">Themes</a>
+      <a href="terms-en.html">Terms</a>
+      <a href="privacy-en.html">Privacy Policy</a>
+    </div>
   </div>
 </header>
 
@@ -1083,6 +1133,14 @@ document.addEventListener('keydown', e => {
 });
 
 collectZoomables();
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
 </script>
 </body>
 </html>
